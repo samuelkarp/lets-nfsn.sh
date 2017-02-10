@@ -3,12 +3,12 @@ set -o errexit -o nounset -o pipefail
 
 function deploy_challenge {
 	local DOMAIN="${1}" TOKEN_FILENAME="${2}" TOKEN_VALUE="${3}"
-	echo " + No hook enabled for deploying challenges."
+	#echo " + No hook enabled for deploying challenges."
 }
 
 function clean_challenge {
 	local DOMAIN="${1}" TOKEN_FILENAME="${2}" TOKEN_VALUE="${3}"
-	echo " + No hook enabled for cleaning challenges."
+	#echo " + No hook enabled for cleaning challenges."
 }
 
 function deploy_cert {
