@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-Dir=`dirname $0`
-RealDir=`realpath ${Dir}`
-
-. ${RealDir}/nfsn-init.sh
-. ${RealDir}/nfsn-sign.sh
+echo
+echo Please transition to tls-setup.sh.
+echo
+echo See:
+echo https://members.nearlyfreespeech.net/forums/viewtopic.php?t=9230
+echo
 
