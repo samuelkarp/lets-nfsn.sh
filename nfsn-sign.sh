@@ -2,7 +2,7 @@
 set -o errexit -o nounset -o pipefail
 
 echo " + Performing initial run..."
-dehydrated/dehydrated --cron
+/usr/local/bin/dehydrated --cron
 
 user_site=${MAIL##*/}
 printf '
