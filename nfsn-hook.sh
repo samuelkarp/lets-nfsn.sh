@@ -17,6 +17,11 @@ function deploy_cert {
 	cat "$KEYFILE" "$CERTFILE" "$CHAINFILE" | nfsn -i set-tls
 }
 
+function exit_hook {
+	true
+	#echo " + No hook enabled for exit_hook."
+}
+
 function unchanged_cert {
 	local DOMAIN="${1}" KEYFILE="${2}" CERTFILE="${3}" FULLCHAINFILE="${4}" CHAINFILE="${5}"
 	echo " + Certificate for ${DOMAIN} unchanged."
