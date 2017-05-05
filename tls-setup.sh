@@ -86,7 +86,7 @@ fi
 
 /usr/local/bin/dehydrated --cron >${BASEDIR}/dehydrated.out
 
-if fgrep -v INFO: "${BASEDIR}/dehydrated.out" | fgrep -v unchanged | fgrep -v 'Skipping renew' | fgrep -v 'Checking expire date' | egrep -v '^Processing' || [ "${Verbose}" = "yes" ]
+if fgrep -v INFO: "${BASEDIR}/dehydrated.out" | fgrep -v unchanged | fgrep -v 'Skipping renew' | fgrep -v 'Checking expire date' | egrep -q -v '^Processing' || [ "${Verbose}" = "yes" ]
 then
 	cat "${BASEDIR}/dehydrated.out"
 fi
