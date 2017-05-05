@@ -1,11 +1,12 @@
 #!/bin/sh
 
+Help=no
 Reinstall=no
 Verbose=no
 
-while [ $# -gt 0 ]
+while [ ${#} -gt 0 ]
 do
-	Arg=$1
+	Arg=${1}
 	shift 1
 	case ${Arg} in
 	"-h"|"--help")
