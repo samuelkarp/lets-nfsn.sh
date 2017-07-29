@@ -47,7 +47,13 @@ fi
 
 if [ ! -d "${BASEDIR}/accounts" ]
 then
-	echo "Do you accept the Let's Encrypt Terms of Service (y/n)? "
+	echo
+	echo "To use Let's Encrypt you must agree to their Subscriber Agreement,"
+	echo "which is linked from:"
+	echo
+	echo "    https://letsencrypt.org/repository/"
+	echo
+	echo "Do you accept the Let's Encrypt Subscriber Agreement (y/n)? "
 	read yes
 	case $yes in
 		y|Y|yes|YES|Yes|yup)
