@@ -60,7 +60,7 @@ then
 			break 2
 			;;
 		*)
-			echo "You must agree to the their Terms to use their Service."
+			echo "OK, tls-setup.sh will be aborted."
 			return 30
 	esac
 	/usr/local/bin/dehydrated --register --accept-terms
