@@ -53,7 +53,7 @@ then
 	echo
 	echo "    https://letsencrypt.org/repository/"
 	echo
-	echo "Do you accept the Let's Encrypt Subscriber Agreement (y/n)? "
+	echo -n "Do you accept the Let's Encrypt Subscriber Agreement (y/n)? "
 	read yes
 	case $yes in
 		y|Y|yes|YES|Yes|yup)
