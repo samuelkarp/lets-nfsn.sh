@@ -45,6 +45,21 @@ then
 	mkdir "${BASEDIR}"
 fi
 
+if [ ! -d "${BASEDIR}/accounts" ]
+then
+	echo "Do you accept the Let's Encrypt Terms of Service (y/n)? "
+	read yes
+	case $yes in
+		y|Y|yes|YES|Yes|yup)
+			break 2
+			;;
+		*)
+			echo "You must agree to the their Terms to use their Service."
+			return 30
+	esac
+	/usr/local/bin/dehydrated --register --accept-terms
+fi
+
 if [ ! -d "${WELLKNOWN}" ]
 then
 	echo "Creating well-known directory for Let's Encrypt challenges."
