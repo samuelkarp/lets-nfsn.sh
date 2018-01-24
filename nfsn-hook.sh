@@ -41,6 +41,9 @@ function unchanged_cert {
 	# curl -fsS -o /dev/null --data-binary "${DOMAIN} UNCHANGED" https://totmann.danielfett.de/check/{UUID}/log
 }
 
+function startup_hook {
+	true
+}
 
 HANDLER="$1"; shift; "$HANDLER" "$@"
 
