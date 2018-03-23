@@ -84,10 +84,27 @@ for Alias in `cat "${BASEDIR}/domains.txt"`
 do
 	if [ -d "/home/public/${Alias}" ]
 	then
-		if [ ! -h "/home/public/${Alias}/.well-known" ]
+		AliasWellKnown="/home/public/${Alias}/.well-known"
+		if [ -h "${AliasWellKnown}" ]
 		then
-			echo "Linking well-known for ${Alias}."
-			ln -s ../.well-known /home/public/${Alias}/.well-known
+			echo "Upgrading ${AliasWellKnown}"
+			rm "${AliasWellKnown}"
+		fi
+		if [ ! -d "${AliasWellKnown}" ]
+		then
+			echo "Creating .well-known directory for ${Alias}."
+			mkdir "${AliasWellKnown}"
+			ACMEChallenge="${AliasWellKnown}/acme-challenge"
+			if [ ! -h "${ACMEChallenge}" ]
+			then
+				if [ -e "${ACMEChallenge}" ]
+				then
+					echo "Please remove existing ${ACMEChallenge} to use this script." >&2
+					return 40
+				fi
+				echo "Linking acme-challenge for ${Alias}."
+				ln -s ../../.well-known/acme-challenge ${ACMEChallenge}
+			fi
 		fi
 	fi
 	if [ "${Reinstall}" = "yes" ]
