@@ -29,7 +29,7 @@ function invalid_challenge {
 
 
 function unchanged_cert {
-	#local DOMAIN="${1}" KEYFILE="${2}" CERTFILE="${3}" FULLCHAINFILE="${4}" CHAINFILE="${5}"
+	local DOMAIN="${1}" #KEYFILE="${2}" CERTFILE="${3}" FULLCHAINFILE="${4}" CHAINFILE="${5}"
 	echo " + Certificate for ${DOMAIN} unchanged."
 }
 
