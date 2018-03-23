@@ -35,7 +35,7 @@ function unchanged_cert {
 
 
 function function_exists() {
-	declare -f "${1}"
+	declare -f "${1}" >/dev/null
 	return $?
 }
 
