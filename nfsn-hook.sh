@@ -45,6 +45,16 @@ function startup_hook {
 	true
 }
 
-HANDLER="$1"; shift; "$HANDLER" "$@"
+function function_exists() {
+	declare -f "${1}"
+	return $?
+}
+
+HANDLER="$1"; shift;
+
+if function_exists "$HANDLER"
+then
+	"$HANDLER" "$@"
+fi
 
 
