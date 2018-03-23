@@ -21,12 +21,6 @@ function deploy_cert {
 }
 
 
-function exit_hook {
-	true
-	#echo " + No hook enabled for exit_hook."
-}
-
-
 function invalid_challenge {
 	local DOMAIN="${1}" RESULT="${2}"
 	echo " + Certificate for ${DOMAIN} had invalid challenge. Result follows:"
@@ -35,15 +29,10 @@ function invalid_challenge {
 
 
 function unchanged_cert {
-	local DOMAIN="${1}" KEYFILE="${2}" CERTFILE="${3}" FULLCHAINFILE="${4}" CHAINFILE="${5}"
+	#local DOMAIN="${1}" KEYFILE="${2}" CERTFILE="${3}" FULLCHAINFILE="${4}" CHAINFILE="${5}"
 	echo " + Certificate for ${DOMAIN} unchanged."
-	# echo " + Resetting dead man's switch..."
-	# curl -fsS -o /dev/null --data-binary "${DOMAIN} UNCHANGED" https://totmann.danielfett.de/check/{UUID}/log
 }
 
-function startup_hook {
-	true
-}
 
 function function_exists() {
 	declare -f "${1}"
