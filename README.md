@@ -1,6 +1,13 @@
 # Let's Encrypt automation for NearlyFreeSpeech
 
-This package is no longer intended to be used directly.  Please use
-the (preinstalled by default) tls-setup.sh script to manage Let's Encrypt
-TLS configuration at NearlyFreeSpeech.NET.
+You do not need to clone this repository to use this tool!
+
+It is preinstalled on our system and can be used without
+any external setup to install and maintain Let's Encrypt TLS 
+configuration at NearlyFreeSpeech.NET.  Just run it from the ssh server:
+
+YourPrompt> __tls-setup.sh__
+
+This repository is here for code review, comment, and proposed changes
+by interested third parties.
 
