@@ -124,7 +124,7 @@ fi
 
 /usr/local/bin/dehydrated --cron >${BASEDIR}/dehydrated.out
 
-if fgrep -v INFO: "${BASEDIR}/dehydrated.out" | fgrep -v unchanged | fgrep -v 'Skipping renew' | fgrep -v 'Reusing account from' | fgrep -v 'Creating chain cache directory' | fgrep -v 'Checking expire date' | egrep -q -v '^Processing' || [ "${Verbose}" = "yes" ]
+if fgrep -v INFO: "${BASEDIR}/dehydrated.out" | fgrep -v unchanged | fgrep -v 'Skipping renew' | fgrep -v 'Reusing account from' | fgrep -v 'Creating chain cache directory' | fgrep -v 'Checking expire date' | fgrep -v 'Running automatic cleanup' | egrep -q -v '^Processing' || [ "${Verbose}" = "yes" ]
 then
 	cat "${BASEDIR}/dehydrated.out"
 fi
