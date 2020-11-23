@@ -3,6 +3,9 @@
 Help=no
 Reinstall=no
 Verbose=no
+Quiet=no
+
+set -e
 
 while [ ${#} -gt 0 ]
 do
@@ -11,6 +14,9 @@ do
 	case ${Arg} in
 	"-h"|"--help")
 		Help=yes
+		;;
+	"-q"|"--quiet")
+		Quiet=yes
 		;;
 	"-r"|"--reinstall")
 		Reinstall=yes
@@ -32,12 +38,15 @@ then
 	echo
 	echo "Options:"
 	echo "  -h, --help      = Display this output."
+	echo "  -q, --quiet     = Suppress renewal messages. (No news is good news.)"
 	echo "  -r, --reinstall = Reinstall existing certificates."
 	echo "  -v, --verbose   = Don't suppress boring output."
 	echo
 	return 0
 fi
 
+if false
+then
 . /usr/local/etc/dehydrated/config
 if [ ! -d "${BASEDIR}" ]
 then
@@ -123,8 +132,24 @@ then
 fi
 
 /usr/local/bin/dehydrated --cron >${BASEDIR}/dehydrated.out
+fi
 
-if fgrep -v INFO: "${BASEDIR}/dehydrated.out" | fgrep -v unchanged | fgrep -v 'Skipping renew' | fgrep -v 'Reusing account from' | fgrep -v 'Creating chain cache directory' | fgrep -v 'Checking expire date' | fgrep -v 'Running automatic cleanup' | egrep -q -v '^Processing' || [ "${Verbose}" = "yes" ]
+BASEDIR=/tmp
+
+cp ${BASEDIR}/dehydrated.out ${BASEDIR}/dehydrated.check
+if [ "${Verbose}" = "no" ]
+then
+	mv ${BASEDIR}/dehydrated.check ${BASEDIR}/dehydrated.checkin
+	fgrep -v INFO: ${BASEDIR}/dehydrated.checkin | fgrep -v unchanged | fgrep -v 'Skipping renew' | fgrep -v 'Reusing account from' | fgrep -v 'Certificate will not expire' | fgrep -v 'Creating chain cache directory' | fgrep -v 'Checking expire date' | fgrep -v 'Running automatic cleanup' | egrep -v '^Processing' >${BASEDIR}/dehydrated.check
+	if [ "${Quiet}" = "yes" ]
+	then
+		mv ${BASEDIR}/dehydrated.check ${BASEDIR}/dehydrated.checkin
+		fgrep -v 'Moving unused file to archive directory' ${BASEDIR}/dehydrated.checkin | fgrep -v 'Certificate will expire (Less than 30 days). Renewing!' | egrep -v '^ \+ (Signing|Generating|Requesting|Received|Handling|Deploying|Checking|Cleaning|Responding|Creating|Installing) ' | fgrep -v 'Challenge is valid!' |  fgrep -v 'pending challenge(s)' | fgrep -v 'Done!' | fgrep -v 'OK: Setup was fully confirmed.' | egrep -v '^e[0-9]+: OK \(' | cat >${BASEDIR}/dehydrated.check
+	fi
+fi
+[ -f ${BASEDIR}/dehydrated.checkin ] && rm -f ${BASEDIR}/dehydrated.checkin
+
+if [ "`cat ${BASEDIR}/dehydrated.check`" != "" -o "${Verbose}" = "yes" ]
 then
 	cat "${BASEDIR}/dehydrated.out"
 fi
