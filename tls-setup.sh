@@ -157,7 +157,17 @@ fi
 if ! /usr/local/bin/nfsn test-cron tlssetup | fgrep -q 'exists=true'
 then
 	echo Adding scheduled task to renew certificates.
-	/usr/local/bin/nfsn add-cron tlssetup /usr/local/bin/tls-setup.sh me ssh '?' '*' '*'
+	if [ "${Verbose}" = "no" ]
+	then
+		if [ "${Quiet}" = "yes" ]
+		then
+			/usr/local/bin/nfsn add-cron tlssetup "/usr/local/bin/tls-setup.sh -q" me ssh '?' '*' '*'
+		else
+			/usr/local/bin/nfsn add-cron tlssetup /usr/local/bin/tls-setup.sh me ssh '?' '*' '*'
+		fi
+	else
+		/usr/local/bin/nfsn add-cron tlssetup "/usr/local/bin/tls-setup.sh -v" me ssh '?' '*' '*'
+	fi
 fi
 
 
