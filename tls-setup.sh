@@ -45,8 +45,6 @@ then
 	return 0
 fi
 
-if false
-then
 . /usr/local/etc/dehydrated/config
 if [ ! -d "${BASEDIR}" ]
 then
@@ -132,9 +130,6 @@ then
 fi
 
 /usr/local/bin/dehydrated --cron >${BASEDIR}/dehydrated.out
-fi
-
-BASEDIR=/tmp
 
 cp ${BASEDIR}/dehydrated.out ${BASEDIR}/dehydrated.check
 if [ "${Verbose}" = "no" ]
