@@ -79,7 +79,10 @@ then
 	mkdir -p "${WELLKNOWN}"
 fi
 
-/usr/local/bin/nfsn list-aliases >${BASEDIR}/domains.txt
+if [ ! -f ${BASEDIR}/domains.txt ] || [ ! -f ${BASEDIR}/.domains-txt-is-precious ]
+then
+	/usr/local/bin/nfsn list-aliases >${BASEDIR}/domains.txt
+fi
 
 if [ ! -s "${BASEDIR}/domains.txt" ]
 then
