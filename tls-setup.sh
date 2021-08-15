@@ -138,7 +138,7 @@ cp ${BASEDIR}/dehydrated.out ${BASEDIR}/dehydrated.check
 if [ "${Verbose}" = "no" ]
 then
 	mv ${BASEDIR}/dehydrated.check ${BASEDIR}/dehydrated.checkin
-	fgrep -v INFO: ${BASEDIR}/dehydrated.checkin | fgrep -v unchanged | fgrep -v 'Skipping renew' | fgrep -v 'Reusing account from' | fgrep -v 'Certificate will not expire' | fgrep -v 'Creating chain cache directory' | fgrep -v 'Checking expire date' | fgrep -v 'Running automatic cleanup' | egrep -v '^Processing' | cat >${BASEDIR}/dehydrated.check
+	fgrep -v INFO: ${BASEDIR}/dehydrated.checkin | fgrep -v unchanged | fgrep -v 'Skipping renew' | fgrep -v 'Reusing account from' | fgrep -v 'Certificate will not expire' | fgrep -v 'Creating chain cache directory' | fgrep -v 'Checking expire date' | fgrep -v 'Running automatic cleanup' | egrep -v '^Processing' | fgrep -v 'Fetching account URL' | cat >${BASEDIR}/dehydrated.check
 	if [ "${Quiet}" = "yes" ]
 	then
 		mv ${BASEDIR}/dehydrated.check ${BASEDIR}/dehydrated.checkin
