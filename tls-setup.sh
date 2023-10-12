@@ -104,17 +104,17 @@ do
 		then
 			echo "Creating .well-known directory for ${Alias}."
 			mkdir "${AliasWellKnown}"
-			ACMEChallenge="${AliasWellKnown}/acme-challenge"
-			if [ ! -h "${ACMEChallenge}" ]
+		fi
+		ACMEChallenge="${AliasWellKnown}/acme-challenge"
+		if [ ! -h "${ACMEChallenge}" ]
+		then
+			if [ -e "${ACMEChallenge}" ]
 			then
-				if [ -e "${ACMEChallenge}" ]
-				then
-					echo "Please remove existing ${ACMEChallenge} to use this script." >&2
-					return 40
-				fi
-				echo "Linking acme-challenge for ${Alias}."
-				ln -s ../../.well-known/acme-challenge ${ACMEChallenge}
+				echo "Please remove existing ${ACMEChallenge} to use this script." >&2
+				return 40
 			fi
+			echo "Linking acme-challenge for ${Alias}."
+			ln -s ../../.well-known/acme-challenge ${ACMEChallenge}
 		fi
 	fi
 	if [ "${Reinstall}" = "yes" ]
